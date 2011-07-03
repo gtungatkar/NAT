@@ -1,0 +1,27 @@
+*****NAT Kernel Module*****
+*******************************
+Author: Gaurav Tungatkar
+
+Description:
+Linu kernel module that does network address translation. WAN side IP address,
+LAN subnet and NAT entry timeout are configurable parameters via procfs.
+Start stop using sysfs.
+
+Simple timeout strategy to remove NAT table entries, does not do connection
+tracking.
+
+Pre-routing and Post routing netfilter hooks to change the IP addresses and
+recalculate checksums.
+ 
+Instructions to compile:
+1. Go to project/ folder.
+2. make
+
+Instructions to run:
+1. insmod project/knat.ko
+
+
+Limitations:
+1. Limitations: Port numbers to be used in translation are taken by incrementing a global variable.
+2. If timeout is specified very less, and timeout occurs during an existing TCP connection, that connection will break, since NAT table entry will be removed.
+3. Does not support FTP.
